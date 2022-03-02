@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api1
+  labels:
+    app: api1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: api1
+    spec:
+      containers:
+        - name: api1
+          image: <IMAGE>
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+            limits:
+              cpu: 100m
