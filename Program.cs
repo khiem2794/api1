@@ -9,6 +9,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UsePathBase("/api1");
+
 app.Use(async (context, next) =>
 {
     var remoteIpAddress = context.Request?.HttpContext?.Connection?.RemoteIpAddress;
