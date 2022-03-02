@@ -9,6 +9,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.Use(async (context, next) =>
+{
+    var remoteIpAddress = context.Request?.HttpContext?.Connection?.RemoteIpAddress;
+    Console.WriteLine($"{remoteIpAddress} - {context?.Request?.Path.Value?.ToString()}");
+    await next();
+});
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -19,5 +26,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 Console.WriteLine("STARTING");
+
 
 app.Run();
