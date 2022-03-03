@@ -31,4 +31,10 @@ public class UserController: ControllerBase
 
         return Ok($"{remoteIp} - {remoteIpAddress}");
     }
+
+    [HttpGet]
+    public IActionResult NewApi()
+    {
+        return Ok($"newapi");
+    }
 }
